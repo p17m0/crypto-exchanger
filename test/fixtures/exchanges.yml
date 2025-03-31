@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount_usdt: 9.99
+  amount_sbtc: 9.99
+  recipient_address: MyString
+  email: MyString
+  exchange_fee: 9.99
+  network_fee: 9.99
+  txid: MyString
+  status: MyString
+
+two:
+  amount_usdt: 9.99
+  amount_sbtc: 9.99
+  recipient_address: MyString
+  email: MyString
+  exchange_fee: 9.99
+  network_fee: 9.99
+  txid: MyString
+  status: MyString

@@ -1,0 +1,29 @@
+{
+  "name": "app",
+  "private": "true",
+  "scripts": {
+    "build:css:compile": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
+    "build:css:prefix": "postcss ./app/assets/builds/application.css --use=autoprefixer --output=./app/assets/builds/application.css",
+    "build:css": "yarn build:css:compile && yarn build:css:prefix",
+    "watch:css": "nodemon --watch ./app/assets/stylesheets/ --ext scss --exec \"yarn build:css\"",
+    "check": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "devDependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.86.0",
+    "vite": "^5.4.16",
+    "vite-plugin-ruby": "^5.1.1"
+  },
+  "dependencies": {
+    "@inertiajs/react": "^2.0.5",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.8.2"
+  }
+}
