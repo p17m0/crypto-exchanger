@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useForm } from '@inertiajs/react';
+import styles from './Index.module.scss'; // Импорт модуля стилей
 
 interface Props {
   exchange_rate: number;
@@ -31,55 +32,57 @@ export default function ExchangeIndex({ exchange_rate, max_usdt, errors }: Props
   };
 
   return (
-    <div className="container mt-5">
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label>You send (USDT)</label>
+    <div className={styles.card}>
+      <div className={styles.banner}>
+        <span className={styles.bannerText}>Crypto Exchanger</span>
+        <span className={styles.bannerText}>Exchange Now!</span>
+      </div>
+      <form className={styles.cardForm} onSubmit={handleSubmit}>
+        <div>
+          <label className={styles.cardTitle}>You send (USDT)</label>
           <input
             type="number"
-            className="form-control"
             value={data.exchange.amount_usdt}
             onChange={(e) => setData('exchange', { ...data.exchange, amount_usdt: e.target.value })}
             max={max_usdt}
           />
-          {errors.amount_usdt && <div className="text-danger">{errors.amount_usdt}</div>}
+          {errors.amount_usdt && <div className={styles.errorMessage}>{errors.amount_usdt}</div>}
         </div>
-        <div className="mb-3">
-          <label>You get (sBTC)</label>
-          <input type="number" className="form-control" value={amountSbtc} readOnly />
+        <div>
+          <label className={styles.cardTitle}>You get (sBTC)</label>
+          <input type="number" value={amountSbtc} readOnly />
         </div>
-        <div className="mb-3">
-          <label>Recipient address</label>
+        <div>
+          <label className={styles.cardTitle}>Recipient address</label>
           <input
             type="text"
-            className="form-control"
-            value={data.exchange.recipient_address} // Обновили путь
+            value={data.exchange.recipient_address}
             onChange={(e) => setData('exchange', { ...data.exchange, recipient_address: e.target.value })}
           />
-          {errors.recipient_address && <div className="text-danger">{errors.recipient_address}</div>}
+          {errors.recipient_address && (
+            <div className={styles.errorMessage}>{errors.recipient_address}</div>
+          )}
         </div>
-        <div className="mb-3">
-          <label>E-mail address</label>
+        <div>
+          <label className={styles.cardTitle}>E-mail address</label>
           <input
             type="email"
-            className="form-control"
-            value={data.exchange.email} // Обновили путь
+            value={data.exchange.email}
             onChange={(e) => setData('exchange', { ...data.exchange, email: e.target.value })}
           />
-          {errors.email && <div className="text-danger">{errors.email}</div>}
+          {errors.email && <div className={styles.errorMessage}>{errors.email}</div>}
         </div>
-        <div className="mb-3 form-check">
+        <div className={styles.checkboxWrapper}>
           <input
             type="checkbox"
-            className="form-check-input"
-            checked={data.exchange.kyc_accepted} // Обновили путь
+            checked={data.exchange.kyc_accepted}
             onChange={(e) => setData('exchange', { ...data.exchange, kyc_accepted: e.target.checked })}
           />
-          <label className="form-check-label">I agree with KYC/AML terms</label>
-          {errors.kyc_accepted && <div className="text-danger">{errors.kyc_accepted}</div>}
+          <label>I agree with KYC/AML terms</label>
+          {errors.kyc_accepted && <div className={styles.errorMessage}>{errors.kyc_accepted}</div>}
         </div>
-        <button type="submit" className="btn btn-primary" disabled={processing}>
-          Exchange now
+        <button type="submit" className={styles.signUp} disabled={processing}>
+          Exchange Now
         </button>
       </form>
     </div>
