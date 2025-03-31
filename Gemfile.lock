@@ -74,7 +74,12 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    ar_lazy_preload (1.1.2)
+      rails (>= 5.2)
     ast (2.4.3)
+    audited (5.8.0)
+      activerecord (>= 5.2, < 8.2)
+      activesupport (>= 5.2, < 8.2)
     base64 (0.2.0)
     bcrypt_pbkdf (1.1.1)
     bcrypt_pbkdf (1.1.1-arm64-darwin)
@@ -87,6 +92,7 @@ GEM
     brakeman (7.0.0)
       racc
     builder (3.3.0)
+    cancancan (3.6.1)
     capybara (3.40.0)
       addressable
       matrix
@@ -165,6 +171,13 @@ GEM
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.25.5)
+    motor-admin (0.4.36)
+      ar_lazy_preload (~> 1.0)
+      audited (~> 5.0)
+      cancancan (~> 3.0)
+      csv (>= 3.0)
+      fugit (~> 1.0)
+      rails (>= 5.2)
     msgpack (1.8.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
@@ -403,6 +416,7 @@ DEPENDENCIES
   inertia_rails
   jbuilder
   kamal
+  motor-admin
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)
