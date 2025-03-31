@@ -9,19 +9,21 @@ interface Props {
 
 export default function ExchangeIndex({ exchange_rate, max_usdt, errors }: Props) {
   const { data, setData, post, processing } = useForm({
-    amount_usdt: '',
-    recipient_address: '',
-    email: '',
-    kyc_accepted: false,
+    exchange: {
+      amount_usdt: '',
+      recipient_address: '',
+      email: '',
+      kyc_accepted: false,
+    },
   });
 
   const [amountSbtc, setAmountSbtc] = useState(0);
 
   useEffect(() => {
-    const usdt = parseFloat(data.amount_usdt) || 0;
+    const usdt = parseFloat(data.exchange.amount_usdt) || 0;
     const sbtc = (usdt * (1 - 0.03) * exchange_rate) - 0.000006;
     setAmountSbtc(sbtc > 0 ? sbtc.toFixed(8) : 0);
-  }, [data.amount_usdt, exchange_rate]);
+  }, [data.exchange.amount_usdt, exchange_rate]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,8 +38,8 @@ export default function ExchangeIndex({ exchange_rate, max_usdt, errors }: Props
           <input
             type="number"
             className="form-control"
-            value={data.amount_usdt}
-            onChange={(e) => setData('amount_usdt', e.target.value)}
+            value={data.exchange.amount_usdt}
+            onChange={(e) => setData('exchange', { ...data.exchange, amount_usdt: e.target.value })}
             max={max_usdt}
           />
           {errors.amount_usdt && <div className="text-danger">{errors.amount_usdt}</div>}
@@ -51,8 +53,8 @@ export default function ExchangeIndex({ exchange_rate, max_usdt, errors }: Props
           <input
             type="text"
             className="form-control"
-            value={data.recipient_address}
-            onChange={(e) => setData('recipient_address', e.target.value)}
+            value={data.exchange.recipient_address} // Обновили путь
+            onChange={(e) => setData('exchange', { ...data.exchange, recipient_address: e.target.value })}
           />
           {errors.recipient_address && <div className="text-danger">{errors.recipient_address}</div>}
         </div>
@@ -61,8 +63,8 @@ export default function ExchangeIndex({ exchange_rate, max_usdt, errors }: Props
           <input
             type="email"
             className="form-control"
-            value={data.email}
-            onChange={(e) => setData('email', e.target.value)}
+            value={data.exchange.email} // Обновили путь
+            onChange={(e) => setData('exchange', { ...data.exchange, email: e.target.value })}
           />
           {errors.email && <div className="text-danger">{errors.email}</div>}
         </div>
@@ -70,8 +72,8 @@ export default function ExchangeIndex({ exchange_rate, max_usdt, errors }: Props
           <input
             type="checkbox"
             className="form-check-input"
-            checked={data.kyc_accepted}
-            onChange={(e) => setData('kyc_accepted', e.target.checked)}
+            checked={data.exchange.kyc_accepted} // Обновили путь
+            onChange={(e) => setData('exchange', { ...data.exchange, kyc_accepted: e.target.checked })}
           />
           <label className="form-check-label">I agree with KYC/AML terms</label>
           {errors.kyc_accepted && <div className="text-danger">{errors.kyc_accepted}</div>}

@@ -3,10 +3,10 @@ class ExchangeService
   NETWORK_FEE = 0.000006
 
   def initialize(params)
-    @amount_usdt = params[:amount_usdt].to_f
-    @recipient_address = params[:recipient_address]
-    @email = params[:email]
-    @kyc_accepted = params[:kyc_accepted]
+    @amount_usdt = params["amount_usdt"].to_f
+    @recipient_address = params["recipient_address"]
+    @email = params["email"]
+    @kyc_accepted = params["kyc_accepted"]
     @exchange_rate = fetch_exchange_rate
   end
 
@@ -51,6 +51,10 @@ class ExchangeService
     errors[:email] = 'Invalid email' unless @email.present? && @email.match(URI::MailTo::EMAIL_REGEXP)
     errors[:kyc_accepted] = 'Must accept KYC/AML' unless @kyc_accepted
     errors
+  end
+
+  def valid?
+    validate.empty?
   end
 
   def calculate_sbtc_amount
