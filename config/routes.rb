@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'exchanges#index'
   resources :exchanges, only: [:index, :create]
   get 'inertia-example', to: 'inertia_example#index'
