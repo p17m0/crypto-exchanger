@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount Motor::Admin => '/motor_admin'
   root 'exchanges#index'
   resources :exchanges, only: [:index, :create]
   get 'inertia-example', to: 'inertia_example#index'
