@@ -1,7 +1,6 @@
 import { createInertiaApp } from '@inertiajs/react'
 import { createElement, ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './application.scss';
 
 // Temporary type definition, until @inertiajs/react provides one
 type ResolvedComponent = {

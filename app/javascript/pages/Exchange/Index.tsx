@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useForm } from '@inertiajs/react';
-import styles from './Index.module.scss'; // Импорт модуля стилей
 
 interface Props {
   exchange_rate: number;
@@ -32,56 +31,59 @@ export default function ExchangeIndex({ exchange_rate, max_usdt, errors }: Props
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.banner}>
-        <span className={styles.bannerText}>Crypto Exchanger</span>
-        <span className={styles.bannerText}>Exchange Now!</span>
-      </div>
-      <form className={styles.cardForm} onSubmit={handleSubmit}>
+    <div className="max-w-sm mx-auto mt-12 p-6 bg-white border-4 border-black shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
+      <div className="relative bg-black text-white text-center py-3 font-bold text-lg uppercase rotate-12 -top-5 -right-10 w-80">Crypto Exchanger</div>
+      <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className={styles.cardTitle}>You send (USDT)</label>
+          <label className="block text-xl font-bold border-b-2 border-black mb-2">You send (USDT)</label>
           <input
             type="number"
+            className="w-full p-3 border-2 border-black focus:outline-none focus:ring-2 focus:ring-black"
             value={data.exchange.amount_usdt}
             onChange={(e) => setData('exchange', { ...data.exchange, amount_usdt: e.target.value })}
             max={max_usdt}
           />
-          {errors.amount_usdt && <div className={styles.errorMessage}>{errors.amount_usdt}</div>}
+          {errors.amount_usdt && <div className="text-red-500 text-sm mt-1">{errors.amount_usdt}</div>}
         </div>
         <div>
-          <label className={styles.cardTitle}>You get (sBTC)</label>
-          <input type="number" value={amountSbtc} readOnly />
+          <label className="block text-xl font-bold border-b-2 border-black mb-2">You get (sBTC)</label>
+          <input type="number" className="w-full p-3 border-2 border-black bg-gray-100" value={amountSbtc} readOnly />
         </div>
         <div>
-          <label className={styles.cardTitle}>Recipient address</label>
+          <label className="block text-xl font-bold border-b-2 border-black mb-2">Recipient address</label>
           <input
             type="text"
+            className="w-full p-3 border-2 border-black focus:outline-none focus:ring-2 focus:ring-black"
             value={data.exchange.recipient_address}
             onChange={(e) => setData('exchange', { ...data.exchange, recipient_address: e.target.value })}
           />
-          {errors.recipient_address && (
-            <div className={styles.errorMessage}>{errors.recipient_address}</div>
-          )}
+          {errors.recipient_address && <div className="text-red-500 text-sm mt-1">{errors.recipient_address}</div>}
         </div>
         <div>
-          <label className={styles.cardTitle}>E-mail address</label>
+          <label className="block text-xl font-bold border-b-2 border-black mb-2">E-mail address</label>
           <input
             type="email"
+            className="w-full p-3 border-2 border-black focus:outline-none focus:ring-2 focus:ring-black"
             value={data.exchange.email}
             onChange={(e) => setData('exchange', { ...data.exchange, email: e.target.value })}
           />
-          {errors.email && <div className={styles.errorMessage}>{errors.email}</div>}
+          {errors.email && <div className="text-red-500 text-sm mt-1">{errors.email}</div>}
         </div>
-        <div className={styles.checkboxWrapper}>
+        <div className="flex items-center space-x-2">
           <input
             type="checkbox"
+            className="w-5 h-5"
             checked={data.exchange.kyc_accepted}
             onChange={(e) => setData('exchange', { ...data.exchange, kyc_accepted: e.target.checked })}
           />
-          <label>I agree with KYC/AML terms</label>
-          {errors.kyc_accepted && <div className={styles.errorMessage}>{errors.kyc_accepted}</div>}
+          <label className="text-lg">I agree with KYC/AML terms</label>
         </div>
-        <button type="submit" className={styles.signUp} disabled={processing}>
+        {errors.kyc_accepted && <div className="text-red-500 text-sm">{errors.kyc_accepted}</div>}
+        <button
+          type="submit"
+          className="bg-black text-white py-3 text-lg font-bold uppercase border-2 border-black transition-transform duration-300 hover:bg-white hover:text-black hover:translate-y-[-2px]"
+          disabled={processing}
+        >
           Exchange Now
         </button>
       </form>
