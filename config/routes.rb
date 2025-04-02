@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Motor::Admin => '/motor_admin'
   devise_for :users
   root 'exchanges#index'
   resources :exchanges, only: [:index, :create]

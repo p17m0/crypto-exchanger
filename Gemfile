@@ -69,3 +69,4 @@ gem "vite_rails"
 gem "inertia_rails"
 gem "httparty"
 gem "devise"
+gem 'motor-admin'
